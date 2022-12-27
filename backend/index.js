@@ -1,7 +1,8 @@
 const app = require("./src/app");
 const { sequelize } = require("./src/config/database");
 
-app.listen(4000, async () => {
+const port = process.env || 4000;
+app.listen(port, async () => {
   await sequelize.sync({ force: false });
   console.log(`server is listen the port http://localhost:4000`);
 });
