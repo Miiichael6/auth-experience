@@ -8,9 +8,11 @@ const PublicRoutes = () => {
   const user = useSelector((state) => state.AuthReducer.user);
 
   useEffect(() => {
-    // const myToken = localStorage.getItem("token");
+    const myToken = localStorage.getItem("token");
     const myLogedUser = JSON.parse(localStorage.getItem("loginUser"));
-    // if (!myToken) setCargando(false);
+    setTimeout(() => {
+      if (!myToken) setCargando(false);
+    }, 1000);
     if (myLogedUser?.id) setCargando(false);
   }, []);
 
