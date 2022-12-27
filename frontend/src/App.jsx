@@ -27,7 +27,7 @@ function App() {
       <Routes>
         <Route element={<PublicRoutes />}>
           <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
+          <Route index path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
 
