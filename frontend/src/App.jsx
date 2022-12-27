@@ -26,7 +26,7 @@ function App() {
     <div>
       <Routes>
         <Route element={<PublicRoutes />}>
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<Navigate to="/login" />} />
           <Route index path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>
