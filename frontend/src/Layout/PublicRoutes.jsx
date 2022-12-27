@@ -10,7 +10,7 @@ const PublicRoutes = () => {
   useEffect(() => {
     const myToken = localStorage.getItem("token");
     const myLogedUser = JSON.parse(localStorage.getItem("loginUser"));
-    if (document.cookie || !myToken) setCargando(false);
+    if (!document.cookie) setCargando(false);
     if (myLogedUser?.id) setCargando(false);
   }, []);
 
