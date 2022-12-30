@@ -133,6 +133,7 @@ const usuarioLogin = async (req, res) => {
       email: usuario.email,
       name: usuario.name,
       msg: "usuario logueado correctamente",
+      photo: usuario.photo,
     });
   } catch (error) {
     console.log(error.message);
@@ -142,6 +143,7 @@ const usuarioLogin = async (req, res) => {
 
 const miPerfil = async (req, res) => {
   const { logedUser } = req;
+  console.log(logedUser)
   return res.send(logedUser);
 };
 

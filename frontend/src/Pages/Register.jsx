@@ -35,13 +35,19 @@ const Register = () => {
   };
 
   const handleFormik = async (valores, resetForm) => {
-    const { error } = await dispatch(registrarUsuario(valores));
+    const error = await dispatch(registrarUsuario(valores));
     if (error) {
       setTimeout(() => {
         dispatch(clearErrors());
       }, 4000);
       return;
+    }else {
+      setTimeout(() => {
+        navigate("/login")
+      }, 3000);
     }
+
+
   };
 
   return (

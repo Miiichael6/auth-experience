@@ -13,11 +13,10 @@ import { perfilDeUsuario } from "./redux/actions/authActions";
 
 function App() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function checkAuth() {
-      const posibleError = await dispatch(perfilDeUsuario());
+      await dispatch(perfilDeUsuario());
     }
     checkAuth();
   }, []);

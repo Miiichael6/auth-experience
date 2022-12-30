@@ -53,10 +53,6 @@ export const registrarUsuario = (user) => {
     try {
       const { data } = await axios.post(`/api/users`, user);
       console.log(data);
-
-      // setCookieAuth(data.token);
-
-      return dispatch({ type: REGISTRAR_USUARIO, payload: data });
     } catch (err) {
       dispatch({
         type: ERROR_USER,
