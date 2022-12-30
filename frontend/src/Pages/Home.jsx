@@ -10,6 +10,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(perfilDeUsuario());
   }, [user.id]);
+  console.log(user);
 
   return (
     <div className="text-black bg-neutral-900 min-h-screen">

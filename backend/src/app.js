@@ -11,9 +11,9 @@ const app = express();
 // app.name = "API";
 
 app.use((req, res, next) => {
-  console.log(`Request received at ${req.path}`)
+  console.log(`Request received at ${req.path}`);
   next();
-})
+});
 app.use(express.json());
 app.use(cookieParser());
 app.use(morgan("dev"));

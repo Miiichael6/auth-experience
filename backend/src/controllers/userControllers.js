@@ -1,12 +1,12 @@
 const { User, Post } = require("../config/database");
 const bcrypt = require("bcrypt");
-const { jwtGenerator, refreshJWTtoken } = require("../helpers/jwtGenerator");
+const { jwtGenerator } = require("../helpers/jwtGenerator");
 const { verify } = require("jsonwebtoken");
 
 const obtenerUsuarios = async (req, res) => {
   try {
     const usuarios = await User.findAll({
-      attributes: ["id", "name", "email", "photo", "createdAt", "updatedAt"],
+      attributes: ["id", "name", "email", "photo", "createdAt", "updatedAt", "token"],
       order: [["createdAt", "ASC"]],
     });
 
@@ -143,7 +143,7 @@ const usuarioLogin = async (req, res) => {
 
 const miPerfil = async (req, res) => {
   const { logedUser } = req;
-  console.log(logedUser)
+
   return res.send(logedUser);
 };
 
