@@ -22,6 +22,7 @@ const PrivateRoutes = () => {
     //   setCargando(false);
     //   return;
     // }
+    console.log(user)
   }, [user.id]);
 
   if (cargando) return <InicioLoader />;
