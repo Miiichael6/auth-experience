@@ -17,12 +17,15 @@ const PrivateRoutes = () => {
       localStorage.removeItem("userLogin");
       setCargando(false);
     }
-    if (user.id) setCargando(false);
-    // if (!user.id && userLogin) { // si eliminan lo cookie
-    //   setCargando(false);
-    //   return;
-    // }
-    console.log(user)
+    if (user.id) {
+      setCargando(false)
+      return;
+    };
+    if (!user.id && userLogin) { // si eliminan lo cookie
+      setCargando(false);
+      return;
+    }
+    console.log(user);
   }, [user.id]);
 
   if (cargando) return <InicioLoader />;
