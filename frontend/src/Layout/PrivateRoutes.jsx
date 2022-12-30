@@ -18,15 +18,12 @@ const PrivateRoutes = () => {
       setCargando(false);
     }
     if (user.id) {
-      setCargando(false)
-      return;
-    };
-    if (!user.id && userLogin) { // si eliminan lo cookie
       setCargando(false);
       return;
     }
-    console.log(user);
+
   }, [user.id]);
+  console.log(user);
 
   if (cargando) return <InicioLoader />;
 
