@@ -12,6 +12,7 @@ export const perfilDeUsuario = () => {
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`/api/users/my-perfil`);
+      console.log(data);
       return dispatch({ type: AUTH_PERFIL, payload: data });
     } catch (err) {
       if (err.response) {
