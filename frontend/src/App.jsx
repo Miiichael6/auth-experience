@@ -12,21 +12,21 @@ import Register from "./Pages/Register";
 import { perfilDeUsuario } from "./redux/actions/authActions";
 
 function App() {
-  const user = useSelector((state) => state.AuthReducer.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function checkAuth() {
-      await dispatch(perfilDeUsuario());
+      const posibleError = await dispatch(perfilDeUsuario());
     }
     checkAuth();
-  }, [user.id]);
+  }, []);
 
   return (
-    <div>
+    <div className="bg-black">
       <Routes>
         <Route element={<PublicRoutes />}>
-          <Route path="/" element={<Navigate to="/login" />} />
+          {/* <Route path="/" element={<Navigate to="/login" />} /> */}
           <Route index path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Route>

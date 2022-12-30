@@ -16,9 +16,7 @@ const Header = () => {
   };
 
   const logOut = () => {
-    deleteToken();
-    localStorage.removeItem("loginUser");
-    localStorage.removeItem("token");
+    localStorage.removeItem("userLogin");
     dispatch(logOutUser());
     navigate("/login");
   };
@@ -26,8 +24,6 @@ const Header = () => {
   const profileOptions = (e) => {
     const myProfile = profile.current;
     const boton = e.target.textContent;
-
-    console.log(myProfile);
 
     if (boton === "Perfil") {
       navigate("/perfil");

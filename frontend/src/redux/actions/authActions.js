@@ -1,5 +1,4 @@
 import axios from "axios";
-import setCookieAuth from "../../helpers/setCookie";
 import {
   AUTH_PERFIL,
   CLEAR_ERRORS,
@@ -11,38 +10,21 @@ import {
 
 export const perfilDeUsuario = () => {
   return async function (dispatch) {
-    const myLoginToken = document.cookie.replace("token=", "");
     try {
-      if (myLoginToken) {
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${myLoginToken}`,
-          },
-        };
-        const { data } = await axios.get(`/api/users/my-perfil`, config);
-        if (!data) {
-          return dispatch({
-            type: AUTH_PERFIL,
-            payload: { msgErr: true, errLogin: "usuario no Autenticado" },
-          });
-        }
-        const dataJSON = JSON.stringify(data);
-
-        localStorage.setItem("loginUser", dataJSON);
-        return dispatch({ type: AUTH_PERFIL, payload: data });
-      } else {
-        return dispatch({
-          type: AUTH_PERFIL,
-          payload: { msgErr: true, errLogin: "usuario no Autenticado" },
-        });
-      }
+      const { data } = await axios.get(`/api/users/my-perfil`);
+      return dispatch({ type: AUTH_PERFIL, payload: data });
     } catch (err) {
-      console.error(err);
-      dispatch({
-        type: AUTH_PERFIL,
-        payload: { msgErr: true, errorMsg: err.response.data.msg },
-      });
+      if (err.response) {
+        if (err.response.status === 401) {
+          return {
+            errorAuth: true,
+          };
+        }
+      }
+      // dispatch({
+      //   type: AUTH_PERFIL,
+      //   payload: { msgErr: true, errorMsg: err.response.data.msg },
+      // });
       return { msgErr: true, errorMsg: err.response };
     }
   };
@@ -51,10 +33,10 @@ export const perfilDeUsuario = () => {
 export const logearUsuario = (values) => {
   return async function (dispatch) {
     try {
-      const { data } = await axios.post(`/api/users/login`, values);
-
-      setCookieAuth(data.user.token);
-
+      const { data } = await axios.post(`/api/users/login`, values, {
+        withCredentials: true,
+      });
+      localStorage.setItem("userLogin", JSON.stringify(data));
       return dispatch({ type: LOGIN_USER, payload: data });
     } catch (error) {
       const errorData = { msgErr: true, errorMsg: error.response.data };
@@ -72,7 +54,7 @@ export const registrarUsuario = (user) => {
       const { data } = await axios.post(`/api/users`, user);
       console.log(data);
 
-      setCookieAuth(data.token);
+      // setCookieAuth(data.token);
 
       return dispatch({ type: REGISTRAR_USUARIO, payload: data });
     } catch (err) {
@@ -86,8 +68,16 @@ export const registrarUsuario = (user) => {
 };
 
 export const logOutUser = () => {
-  return {
-    type: LOG_OUT_USER,
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.post(`/api/users/logout`);
+      console.log(data);
+      return dispatch({
+        type: LOG_OUT_USER,
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
   };
 };
 

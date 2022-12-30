@@ -17,19 +17,19 @@ const authReducer = (state = authState, action) => {
     case LOGIN_USER:
       return {
         ...state,
-        user: action.payload.user,
+        user: { ...action.payload },
       };
 
     case AUTH_PERFIL:
       return {
         ...state,
-        user: action.payload,
+        user: { ...action.payload },
       };
     case REGISTRAR_USUARIO:
       // localStorage.setItem("token", action.payload.token);
       return {
         ...state,
-        user: action.payload,
+        user: { ...action.payload },
       };
 
     case LOG_OUT_USER:
@@ -47,8 +47,8 @@ const authReducer = (state = authState, action) => {
     case CLEAR_ERRORS:
       return {
         ...state,
-        error: {}
-      }
+        error: {},
+      };
 
     default:
       return {
