@@ -8,7 +8,12 @@ const Home = () => {
   const user = useSelector((state) => state.AuthReducer.user);
 
   useEffect(() => {
-    dispatch(perfilDeUsuario());
+    async function myProfile() {
+      const data = await dispatch(perfilDeUsuario());
+
+      console.log(await data);
+    }
+    myProfile();
   }, [user.id]);
   console.log(user);
 
